@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Kick · Bembaanuel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0a0f0a;
+            background: radial-gradient(circle at 30% 30%, #1e331e, #030603 90%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Header minimalista */
+        .keep-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #4cff4c;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #00ee00;
+            animation: pulse 2.2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .keep-badge span {
+            color: #b0f0b0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        /* Cuenta principal - foto centrada */
+        .main-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #1f401f, #0f240f);
+            border: 3px solid #45d645;
+            box-shadow: 0 0 30px rgba(70, 255, 70, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 2px 5px rgba(0, 255, 0, 0.2);
+        }
+
+        .main-handle {
+            color: #b0e0b0;
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .main-button {
+            background: transparent;
+            border: 1.5px solid #4bb84b;
+            color: #d0ffd0;
+            padding: 0.8rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .main-button:hover {
+            background: #2b6e2b;
+            color: white;
+            border-color: #8aff8a;
+            box-shadow: 0 0 15px #3eff3e;
+        }
+
+        .main-button:active {
+            transform: scale(0.96);
+        }
+
+        /* Separador sutil */
+        .divider {
+            width: 40px;
+            height: 2px;
+            background: #2d5a2d;
+            margin: 2rem auto 2rem;
+            border-radius: 2px;
+        }
+
+        /* Cuentas secundarias - solo nombre y mensaje llamativo */
+        .secondary-title {
+            color: #9fd89f;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .secondary-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .secondary-item {
+            background: rgba(18, 30, 18, 0.6);
+            backdrop-filter: blur(5px);
+            border: 1px solid #2e572e;
+            border-radius: 60px;
+            padding: 1rem 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .secondary-item:active {
+            background: #1e3a1e;
+            border-color: #6bb86b;
+            transform: scale(0.98);
+        }
+
+        .item-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        .item-info p {
+            color: #b8e6b8;
+            font-size: 0.85rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .item-arrow {
+            color: #75d675;
+            font-size: 1.4rem;
+            opacity: 0.7;
+        }
+
+        /* Footer invisible casi */
+        .footer {
+            margin-top: 3rem;
+            text-align: center;
+            color: #2b4f2b;
+            font-size: 0.7rem;
+        }
+
+        /* responsive */
+        @media (max-width: 380px) {
+            .avatar {
+                width: 90px;
+                height: 90px;
+            }
+            .main-name {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Badge Keep -->
+        <div class="keep-badge">
+            <div class="dot"></div>
+            <span>Kick / central. Smith</span>
+        </div>
+
+        <!-- Cuenta principal: Bembaanuel (Kick) -->
+        <div class="main-profile">
+            <div class="avatar">
+                <!-- Imagen de perfil personalizada (logo) -->
+                <img src="logo.jpg" alt="Bembaanuel logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<svg viewBox=\'0 0 24 24\' width=\'65\' height=\'65\'><circle cx=\'12\' cy=\'8\' r=\'4\' fill=\'#b0ffb0\'/><path d=\'M12 14c-4.42 0-8 2.69-8 6h16c0-3.31-3.58-6-8-6z\' fill=\'#b0ffb0\'/></svg>'">
+            </div>
+            <h1 class="main-name">bembaanuel</h1>
+            <div class="main-handle">@bembaanuel · kick</div>
+            <a href="https://kick.com/bembaanuel" target="_blank" class="main-button">VER DIRECTOS</a>
+        </div>
+
+        <!-- Separador -->
+        <div class="divider"></div>
+
+        <!-- Título para secundarias -->
+        <div class="secondary-title">clips en tiktok</div>
+
+        <!-- Lista de cuentas secundarias (TikTok) -->
+        <div class="secondary-list">
+            <!-- Clips BA -->
+            <div class="secondary-item" id="clipBa">
+                <div class="item-info">
+                    <h3>Clips BA</h3>
+                    <p>"🔥🔥soltando los prohibidos🔥🔥"</p>
+                </div>
+                <div class="item-arrow">↗️</div>
+            </div>
+
+            <!-- PRIOLOXX -->
+            <div class="secondary-item" id="prioloxx">
+                <div class="item-info">
+                    <h3>PRIOLOXX</h3>
+                    <p>❤️💖</p>
+                </div>
+                <div class="item-arrow">↗️</div>
+            </div>
+
+            <!-- PX2EMMANUEX_ -->
+            <div class="secondary-item" id="px2">
+                <div class="item-info">
+                    <h3>PX2EMMANUEX_</h3>
+                    <p>46.1M · live🥱</p>
+                </div>
+                <div class="item-arrow">↗️</div>
+            </div>
+
+            <!-- soto -->
+            <div class="secondary-item" id="soto">
+                <div class="item-info">
+                    <h3>soto</h3>
+                    <p>@Soto Program✨✨</p>
+                </div>
+                <div class="item-arrow">↗️</div>
+            </div>
+
+            <!-- dwsali23 (nueva cuenta) -->
+            <div class="secondary-item" id="dwsali">
+                <div class="item-info">
+                    <h3>dwsali23</h3>
+                    <p>⭐ dwsali ⭐</p>
+                </div>
+                <div class="item-arrow">↗️</div>
+            </div>
+
+            <!-- Adolfo Peña sobrino -->
+            <div class="secondary-item" id="adolfo">
+                <div class="item-info">
+                    <h3>Adolfo Peña sobrino</h3>
+                    <p>YO, WHAT?🧐</p>
+                </div>
+                <div class="item-arrow">↗️</div>
+            </div>
+        </div>
+
+        <!-- Footer sutil -->
+        <div class="footer">
+            kick · gestión de clips
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Enlaces reales de TikTok
+            const links = {
+                clipBa: "https://www.tiktok.com/@clisp_ba",
+                prioloxx: "https://www.tiktok.com/@migueliho_do_grauu?_r=1&_d=f1ab40mkj5lg5j&sec_uid=MS4wLjABAAAArAMxEtpMfFvZVUJ8Vkt_dwJ0fR14kyyVTLQ4IgJ98Sk5pzTDiqLMgzq_RI-yUl29&share_author_id=6956653314541126661&sharer_language=es&source=h5_m&u_code=f1dal673m42jh6&timestamp=1771811853&user_id=7595299163936490504&sec_user_id=MS4wLjABAAAA-Vax2x48NXN2uTBja1bpQPNpWEzEybc7dP25SNlYEJ3xm7x-z77NJUsfsuwMRJOg&item_author_type=2&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7604573525500233480&share_link_id=014f8244-985e-40cc-b28e-ec442461de01&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b7200%2Cb5836&social_share_type=5&enable_checksum=1",
+                px2: "https://www.tiktok.com/@px2emmanuex?_r=1&_t=ZS-949InFNncXg",
+                soto: "https://www.tiktok.com/@smith_soto.01?_r=1&_t=ZS-949J5aQbstm",
+                dwsali: "https://www.tiktok.com/@dwsali23?_r=1&_t=ZS-94AEDsNMOcp",
+                adolfo: "https://www.tiktok.com/@adolfo.pea.sobrin"
+            };
+
+            // Asignar eventos
+            document.getElementById('clipBa').addEventListener('click', () => {
+                window.open(links.clipBa, '_blank');
+            });
+
+            document.getElementById('prioloxx').addEventListener('click', () => {
+                window.open(links.prioloxx, '_blank');
+            });
+
+            document.getElementById('px2').addEventListener('click', () => {
+                window.open(links.px2, '_blank');
+            });
+
+            document.getElementById('soto').addEventListener('click', () => {
+                window.open(links.soto, '_blank');
+            });
+
+            document.getElementById('dwsali').addEventListener('click', () => {
+                window.open(links.dwsali, '_blank');
+            });
+
+            document.getElementById('adolfo').addEventListener('click', () => {
+                window.open(links.adolfo, '_blank');
+            });
+
+            console.log('Keep minimal · listo');
+        })();
+    </script>
+</body>
+</html>
